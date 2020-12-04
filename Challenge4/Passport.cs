@@ -78,7 +78,7 @@ namespace Challenge4
 
             if (int.TryParse(BirthYear, out var birthYear))
             {
-                if (birthYear < 1920 || birthYear > 2002)
+                if (!(birthYear >= 1920 && birthYear <= 2002))
                     return (false, $"Birth year was out of bounds: {birthYear} - Should be 1920 - 2002");
             }
             else return (false, $"Birth year was invalid: {BirthYear}");
@@ -88,7 +88,7 @@ namespace Challenge4
 
             if (int.TryParse(IssueYear, out var issueYear))
             {
-                if (issueYear < 2010 || issueYear > 2020)
+                if (!(issueYear >= 2010 && issueYear <= 2020))
                     return (false, $"Issue year was out of bounds: {issueYear} - Should be 2010 - 2020");
             }
             else return (false, $"Issue year was invalid: {IssueYear}");
@@ -98,7 +98,7 @@ namespace Challenge4
 
             if (int.TryParse(ExpirationYear, out var expYear))
             {
-                if (expYear < 2020 || expYear > 2030)
+                if (!(expYear >= 2020 && expYear <= 2030))
                     return (false, $"Expiration year was out of bounds: {expYear} - Should be 2020 - 2030");
             }
             else return (false, $"Expiration year was invalid: {ExpirationYear}");
@@ -106,7 +106,7 @@ namespace Challenge4
             if (string.IsNullOrEmpty(Height))
                 return (false, "Height year was not set");
 
-            var hgtPattern = "^(((1[5-8][0-9])|(19[0-3]))cm)|(((59|6[0-9]|7[0-6]))in)$";
+            var hgtPattern = "^(((1[5-8][0-9])|(19[0-3]))cm)$|^(((59|6[0-9]|7[0-6]))in)$";
             if (!Regex.IsMatch(Height, hgtPattern))
                 return (false, $"Height was invalid: {Height} - Should be 150cm - 193cm OR 59in - 76in");
 

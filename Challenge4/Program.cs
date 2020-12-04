@@ -19,7 +19,9 @@ namespace Challenge4
                 var result = pp.IsValid();
 
                 if (result.valid)
+                {
                     validPassports++;
+                }
                 else
                 {
                     invalidPassports++;
