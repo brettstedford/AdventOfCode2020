@@ -6,9 +6,9 @@ namespace Challenge5
 {
     public class BoardingPass
     {
-        public int Row { get; private set; }
-        public int Column { get; private set; }
-        public int SeatNumber { get; private set; }
+        public int Row { get; }
+        public int Column { get; }
+        public int SeatNumber { get; }
 
         private const int NumberOfRows = 128;
         private const int NumberOfColumns = 8;
@@ -28,8 +28,8 @@ namespace Challenge5
             SeatNumber = Row * 8 + Column;
         }
         
-        private static readonly Func<int, int, int> CalculateLowerBoundIncrease = (l, u) => ((u - l) / 2) + 1;
-        private static readonly Func<int, int, int> CalculateUpperBoundDecrease = (l, u) => ((u - l) / 2) + 1;
+        private static readonly Func<int, int, int> CalculateBound = (l, u) => (u - l) / 2 + 1;
+        
         private static (int lowerBound, int upperBound) FindNextPartition(string binarySpacePartitionCode, PartitionType partitionType, int lowerBound, int upperBound)
         {
             if (string.IsNullOrEmpty(binarySpacePartitionCode) || lowerBound == upperBound)
@@ -40,15 +40,9 @@ namespace Challenge5
             var nextUpperBound = upperBound;
 
             if (nextCode == PartitionTypeCodes[partitionType])
-            {
-                var decrease = CalculateUpperBoundDecrease(lowerBound, upperBound);
-                nextUpperBound -= decrease;
-            }
+                nextUpperBound -= CalculateBound(lowerBound, upperBound);
             else
-            {
-                var increase = CalculateLowerBoundIncrease(lowerBound, upperBound);
-                nextLowerBound += increase;
-            }
+                nextLowerBound += CalculateBound(lowerBound, upperBound);
 
             return FindNextPartition(binarySpacePartitionCode.Substring(1, binarySpacePartitionCode.Length - 1), partitionType, nextLowerBound, nextUpperBound);
         }
