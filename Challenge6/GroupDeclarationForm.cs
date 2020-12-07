@@ -4,12 +4,12 @@ using System.Linq;
 
 namespace Challenge6
 {
-    public class GroupDeclaratiionForm
+    public class GroupDeclarationForm
     {
         public IEnumerable<char[]> IndividualResults { get; }
         public IEnumerable<char> ResultsAllAnswered { get; }
 
-        public GroupDeclaratiionForm(string resultsAsString)
+        public GroupDeclarationForm(string resultsAsString)
         {
             IndividualResults = resultsAsString
                 .Split("\n")
