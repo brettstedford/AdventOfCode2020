@@ -13,7 +13,7 @@ namespace Challenge8
         private InstructionSet()
         { }
 
-        public static InstructionSet LoadFrom(string filename, int swapIndex = -1)
+        public static InstructionSet LoadFrom(string filename)
         {
             var stringInstructions = File.ReadAllLines(filename);
 
@@ -24,22 +24,6 @@ namespace Challenge8
 
                 return (command, argument);
             }).ToArray();
-
-            if (swapIndex > 0)
-            {
-                var line = instructions[swapIndex];
-
-                if (line.command == "jmp")
-                {
-                    line.command = "nop";
-                }
-                else if(line.command == "nop")
-                {
-                    line.command = "jmp";
-                }
-
-                instructions[swapIndex] = line;
-            }
 
             return new InstructionSet
             {
