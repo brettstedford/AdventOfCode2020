@@ -36,7 +36,7 @@ namespace Challenge8
                     break;
             }
 
-            Console.WriteLine($"Accumulator on completion: {Processor.Accumulator}");
+            Console.WriteLine($"Accumulator on completion after fixed instruction: {Processor.Accumulator}");
         }
     }
 }
