@@ -43,7 +43,7 @@ namespace Challenge7
                     return;
                 
                 var count = int.Parse(Regex.Match(containedBag, "(\\d+)").Value);
-                var bagName = Regex.Match(containedBag.Trim(), "[a-z\\s]+").Value.Trim().TrimEnd('s').TrimEnd('.');
+                var bagName = Regex.Match(containedBag.Trim(), "[a-z]+").Value.Trim().TrimEnd('s').TrimEnd('.');
                 
                 if (LuggageCount.ContainsKey(bagName))
                     LuggageCount[bagName] += count;
