@@ -36,7 +36,7 @@ namespace Challenge8
                     break;
             }
 
-            Console.WriteLine($"Accumulator when started looping: {Processor.Accumulator}");
+            Console.WriteLine($"Accumulator on completion: {Processor.Accumulator}");
         }
     }
 }
