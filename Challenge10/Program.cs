@@ -56,25 +56,25 @@ namespace Challenge10
             }
         }
         
-        public static long CalculateStepsFrom(int i, List<int> adaptors)
+        public static long CalculateStepsFrom(int adaptorIndex, List<int> adaptors)
         {
-            if (i == adaptors.Count-1)
+            if (adaptorIndex == adaptors.Count-1)
                 return 1;
 
-            if (CalculatedSteps.ContainsKey(i))
-                return CalculatedSteps[i];
+            if (CalculatedSteps.ContainsKey(adaptorIndex))
+                return CalculatedSteps[adaptorIndex];
             
             long steps = 0;
             
-            for(var j = i+1; j < adaptors.Count; j++)
+            for(var nextAdaptorIndex = adaptorIndex+1; nextAdaptorIndex < adaptors.Count; nextAdaptorIndex++)
             {
-                if (adaptors[j] - adaptors[i] <= 3)
+                if (adaptors[nextAdaptorIndex] - adaptors[adaptorIndex] <= 3)
                 {
-                    steps += CalculateStepsFrom(j, adaptors);
+                    steps += CalculateStepsFrom(nextAdaptorIndex, adaptors);
                 }
             }
 
-            CalculatedSteps[i] = steps;
+            CalculatedSteps[adaptorIndex] = steps;
 
             return steps;
         }
