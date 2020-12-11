@@ -6,8 +6,9 @@ namespace Challenge10
 {
     class Program
     {
-        private static List<int> TestedAdaptors = new List<int>();
-        private static Dictionary<int, int> Differences = new Dictionary<int, int>();
+        private static readonly List<int> TestedAdaptors = new List<int>();
+        private static readonly Dictionary<int, int> Differences = new Dictionary<int, int>();
+        private static readonly Dictionary<int, long> CalculatedSteps = new Dictionary<int, long>();
         private const int OutletJolts = 0;
         private const int JoltRatingThreshold = 3;
 
@@ -25,36 +26,13 @@ namespace Challenge10
             Console.WriteLine($"Differences of 1: {Differences[1]}");
             Console.WriteLine($"Differences of 3: {Differences[3]}");
             Console.WriteLine($"Multiplied: {Differences[1]*Differences[3]}");
-            adaptors.Insert(0,0);
-            adaptors.Add(adaptors.Last() + 3);
+           
+            adaptors.Insert(0,0); // outlet
+            adaptors.Add(adaptors.Last() + 3); // my device
             var combinations = CalculateStepsFrom(0, adaptors);
             Console.WriteLine($"Combinations: {combinations}");
         }
-
-        private static Dictionary<int, long> CalculatedSteps = new Dictionary<int, long>();
-
-        public static long CalculateStepsFrom(int i, List<int> adaptors)
-        {
-            if (i == adaptors.Count-1)
-                return 1;
-
-            if (CalculatedSteps.ContainsKey(i))
-                return CalculatedSteps[i];
-            
-            long steps = 0;
-            
-            for(var j = i+1; j < adaptors.Count; j++)
-            {
-                if (adaptors[j] - adaptors[i] <= 3)
-                {
-                    steps += CalculateStepsFrom(j, adaptors);
-                }
-            }
-
-            CalculatedSteps[i] = steps;
-
-            return steps;
-        }
+        
         private static void TestAdaptorsDifferences(List<int> adaptors, int minTestRating, int maxTestRating)
         {
             var adaptorsUnderTest = adaptors
@@ -76,6 +54,29 @@ namespace Challenge10
 
                 TestAdaptorsDifferences(adaptors, adaptor, adaptor + JoltRatingThreshold);
             }
+        }
+        
+        public static long CalculateStepsFrom(int i, List<int> adaptors)
+        {
+            if (i == adaptors.Count-1)
+                return 1;
+
+            if (CalculatedSteps.ContainsKey(i))
+                return CalculatedSteps[i];
+            
+            long steps = 0;
+            
+            for(var j = i+1; j < adaptors.Count; j++)
+            {
+                if (adaptors[j] - adaptors[i] <= 3)
+                {
+                    steps += CalculateStepsFrom(j, adaptors);
+                }
+            }
+
+            CalculatedSteps[i] = steps;
+
+            return steps;
         }
     }
 }
