@@ -12,7 +12,7 @@ namespace Challenge3
         // static void Main(string[] args)
         // {
         //     var landscape = Input.GetLandscapeSection();
-        //     landscape = ExtrapolateLandscape(landscape, 50);
+        //     landscape = DuplicateLandscape(landscape, 50);
         //     TraverseLandscape(landscape);
         // }
 
@@ -21,7 +21,7 @@ namespace Challenge3
             IEnumerable<(int x, int y)> slopesVariations = new (int x, int y)[]
             {
                 (1,1),
-                (3, 1),
+                (3,1),
                 (5,1),
                 (7,1),
                 (1,2)
@@ -32,14 +32,14 @@ namespace Challenge3
             foreach (var variation in slopesVariations)
             {
                 var landscape = Input.GetLandscapeSection();
-                landscape = ExtrapolateLandscape(landscape, 100);
+                landscape = DuplicateLandscape(landscape, 100);
                 multiplied *= TraverseLandscape(landscape, variation);
             }
 
             Console.WriteLine($"Multiplied: {multiplied}");
         }
 
-        static char[,] ExtrapolateLandscape(char[,] landscapeSection, int multiplier)
+        static char[,] DuplicateLandscape(char[,] landscapeSection, int multiplier)
         {
             var ranks = landscapeSection.GetLength(1);
             var extrapolatedRanks = ranks * multiplier;
